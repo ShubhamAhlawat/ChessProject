@@ -1,4 +1,4 @@
-FROM python:tensorflow/tensorflow:nightly
+FROM tensorflow/tensorflow:nightly
 
 WORKDIR /app
 
