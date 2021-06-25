@@ -5,6 +5,13 @@ imageName=0
   agent any
   stages
     {
+    stage('Test'){
+    steps{
+    sh """
+          python3 test.py
+       """
+    }
+    }
     stage('Docker build to Image'){
     steps{
     script{
@@ -21,6 +28,20 @@ imageName=0
         }
         }
         }
-
+    stage("Rundeck Deploy"){
+     steps{
+     script {
+               step([
+                 $class: "RundeckNotifier",
+                 includeRundeckLogs: true,
+                 rundeckInstance: "Rundeck Server",
+                 jobId: "b749e5e7-361b-4d1e-bb67-6d1a3e1a0068",
+                 shouldWaitForRundeckJob: true,
+                 shouldFailTheBuild: true,
+                 tailLog: true
+               ])
+             }
+     }
+     }
   }
 }
