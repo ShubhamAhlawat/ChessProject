@@ -1,3 +1,4 @@
+let x=brd_hisPly;
 function upload(){
 let image=document.getElementById('customFile').files[0];
 if(image){
